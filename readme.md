@@ -41,9 +41,3 @@ $ eslint app/
 ![SportPursuit IPhone 6 (IOS 10) Simulator](https://i.imgur.com/KGdrjka.png)
 ![SportPursuit IPhone 6 (IOS 10) Simulator](https://i.imgur.com/aBAee36.png)
 ![SportPursuit IPhone 6 (IOS 10) Simulator](https://i.imgur.com/BCJOHHy.jpg)
-
-### Android 7 (IOS 10) Simulator
-![SportPursuit IPhone 6 (IOS 10) Simulator](https://i.imgur.com/vpRQiq3.png)
-![SportPursuit IPhone 6 (IOS 10) Simulator](https://i.imgur.com/KGdrjka.png)
-![SportPursuit IPhone 6 (IOS 10) Simulator](https://i.imgur.com/aBAee36.png)
-![SportPursuit IPhone 6 (IOS 10) Simulator](https://i.imgur.com/BCJOHHy.jpg)
