@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
+import { Alert, Platform, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Router, Scene, Stack } from 'react-native-router-flux';
@@ -10,20 +10,30 @@ import * as Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
   icon: {
+    paddingTop: 2,
     color: Colors.DEFAULT_TEXT_COLOR,
+    height: 30,
+    width: 30,
   },
   profileIcon: {
-    right: 15,
+    paddingRight: 5,
   },
   barsIcon: {
-    left: 15,
+    paddingLeft: 15,
   },
   navBar: {
     backgroundColor: Colors.PRIMARY_COLOR,
   },
   navBarImage: {
     height: 30,
-    width: 160,
+    width: 190,
+  },
+  navBarImageAndroid: {
+    alignSelf: 'center',
+    backgroundColor: Colors.TRANSPARENT_BACKGROUND,
+  },
+  navBarImageIOS: {
+    width: 140,
   },
 });
 
@@ -47,18 +57,21 @@ export default class SportPursuit extends Component {
    * @param props
    */
   renderRightButton = props => (
-    <TouchableOpacity onPress={() => {
-      Alert.alert(
-        'Profile message',
-        'This is native alert for ios/android',
-        [
-          { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ],
-        { cancelable: true },
-      );
-    }} style={styles.profileIcon}>
-      <Icon name='user' size={20} style={styles.icon}/>
+    <TouchableOpacity
+      onPress={() => {
+        Alert.alert(
+          'Profile message',
+          'Go to profile',
+          [
+            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+          ],
+          { cancelable: true },
+        );
+      }}
+      style={styles.profileIcon}
+    >
+      <Icon name='user' size={22} style={styles.icon}/>
     </TouchableOpacity>
   );
 
@@ -69,7 +82,7 @@ export default class SportPursuit extends Component {
   renderLeftButton = props => (
     <TouchableOpacity onPress={this.openControlPanel}
                       style={styles.barsIcon}>
-      <Icon name='bars' size={20} style={styles.icon}/>
+      <Icon name='bars' size={22} style={styles.icon}/>
     </TouchableOpacity>
   );
 
@@ -84,7 +97,7 @@ export default class SportPursuit extends Component {
         tapToClose={true}
       >
         <StatusBar
-          backgroundColor="blue"
+          backgroundColor={Colors.PRIMARY_COLOR}
           barStyle="light-content"
         />
         <Router>
@@ -94,7 +107,7 @@ export default class SportPursuit extends Component {
               component={Home}
               title="Main page"
               navigationBarTitleImage={require('../../assets/logo.png')}
-              navigationBarTitleImageStyle={styles.navBarImage}
+              navigationBarTitleImageStyle={[styles.navBarImage, Platform.OS !== 'ios' ? styles.navBarImageAndroid : styles.navBarImageIOS]}
               navigationBarStyle={styles.navBar}
               right={this.renderRightButton}
               left={this.renderLeftButton}
