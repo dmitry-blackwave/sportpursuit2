@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import Image from 'react-native-image-progress';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   image: {
-    resizeMode: 'cover',
     height: 150,
     top: 0,
   },
   logo: {
     flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'contain',
+    margin: 10,
   },
   icon: {
     color: Colors.DEFAULT_TEXT_COLOR,
@@ -93,7 +91,7 @@ export default class PromoCard extends Component {
   render() {
     const {
       data: {
-        title, logo, extra, description, image, timer, webImage,
+        title, logo, extra, description, image, timer,
       },
     } = this.props;
     return (
@@ -108,9 +106,8 @@ export default class PromoCard extends Component {
           });
         }}
       >
-        <Image source={{ uri: image || webImage }}
+        <Image source={{ uri: image }}
                style={[
-                 StyleSheet.absoluteFill,
                  styles.image,
                  { width: this.state.viewport.width },
                ]}/>
@@ -119,7 +116,11 @@ export default class PromoCard extends Component {
           <View style={styles.imageLogo}>
             <View style={styles.brandContainer}>
               {logo
-                ? <Image source={{ uri: logo }} style={styles.logo}/>
+                ? <Image
+                  source={{ uri: logo }}
+                  style={styles.logo}
+                  renderError={({ error }) => (<Text>error</Text>)}
+                />
                 : <View/>}
             </View>
             <View style={styles.extraContainer}>

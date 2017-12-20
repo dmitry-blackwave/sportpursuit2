@@ -47,7 +47,7 @@ export default class SportPursuit extends Component {
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.setState({renderPlaceholderOnly: false});
+      this.setState({ renderPlaceholderOnly: false });
     });
   }
 
