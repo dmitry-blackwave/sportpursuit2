@@ -72,12 +72,6 @@ export default class Menu extends Component {
         onPress={() => {
           if (url.length) {
             Linking.openURL(type === 'link' && url.length > 10 ? url : Config.options.main + url);
-          } else {
-            this.setState({
-              isChildren: true,
-              childrenList: children,
-              activeParent: label,
-            });
           }
         }}
       >
@@ -122,7 +116,7 @@ export default class Menu extends Component {
             : <View/>}
           <FlatList
             data={this.state.isChildren ? this.state.childrenList : this.props.menu.items}
-            renderItem={this.renderItem.bind(this)}
+            renderItem={this.renderItem}
             keyExtractor={(item, index) => index}
             ItemSeparatorComponent={({ highlighted }) => (
               <View style={styles.separator}/>

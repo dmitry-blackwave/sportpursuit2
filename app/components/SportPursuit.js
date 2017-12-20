@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Platform, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
+import { Alert, Platform, StatusBar, StyleSheet, TouchableOpacity, InteractionManager } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Router, Scene, Stack } from 'react-native-router-flux';
@@ -44,6 +44,12 @@ export default class SportPursuit extends Component {
   static propTypes = {
     menu: PropTypes.object.isRequired,
   };
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({renderPlaceholderOnly: false});
+    });
+  }
 
   /**
    * Open drawer menu event
@@ -95,6 +101,7 @@ export default class SportPursuit extends Component {
         content={<Menu menu={this.props.menu}/>}
         openDrawerOffset={0.55}
         tapToClose={true}
+        panOpenMask={0.3}
       >
         <StatusBar
           backgroundColor={Colors.PRIMARY_COLOR}
