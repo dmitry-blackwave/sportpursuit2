@@ -1,3 +1,4 @@
+import fetch from 'cross-fetch';
 import * as constants from '../constants/ActionTypes';
 import Config from '../config/Config';
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Image from 'react-native-image-progress';
 import PropTypes from 'prop-types';
+import { CustomCachedImage } from 'react-native-img-cache';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Colors from '../../constants/Colors';
 
@@ -106,17 +107,20 @@ export default class PromoCard extends Component {
           });
         }}
       >
-        <Image source={{ uri: image }}
-               style={[
-                 styles.image,
-                 { width: this.state.viewport.width },
-               ]}/>
+        <CustomCachedImage
+          component={Image}
+          source={{ uri: image }}
+          style={[
+            styles.image,
+            { width: this.state.viewport.width },
+          ]}/>
         <View style={styles.contentContainer}>
           <View/>
           <View style={styles.imageLogo}>
             <View style={styles.brandContainer}>
               {logo
-                ? <Image
+                ? <CustomCachedImage
+                  component={Image}
                   source={{ uri: logo }}
                   style={styles.logo}
                   renderError={({ error }) => (<Text>error</Text>)}
