@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Dimensions, FlatList, View, StyleSheet } from 'react-native';
+import { Dimensions, View, StyleSheet } from 'react-native';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import PropTypes from 'prop-types';
 import Item from './Item';
 
@@ -35,17 +36,8 @@ export default class Banner extends Component {
 
   render() {
     return (
-      <View
-        onLayout={() => {
-          this.setState({
-            viewport: {
-              width: Dimensions.get('window').width,
-              height: Dimensions.get('window').height,
-            },
-          });
-        }}
-      >
-        <FlatList
+      <View>
+        <OptimizedFlatList
           data={this.props.bannerItems}
           renderItem={({ item, index }) => (
             <Item
