@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     justifyContent: 'flex-start',
-    paddingTop: 50,
+    paddingTop: 30,
   },
   iconContainer: {
     width: 20,

@@ -43,12 +43,18 @@ const styles = StyleSheet.create({
 export default class SportPursuit extends Component {
   static propTypes = {
     menu: PropTypes.object.isRequired,
+    onGetHome: PropTypes.func,
+    onGetMenu: PropTypes.func,
+    onGetBestSellers: PropTypes.func,
   };
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       this.setState({ renderPlaceholderOnly: false });
     });
+    this.props.onGetHome();
+    this.props.onGetMenu();
+    this.props.onGetBestSellers();
   }
 
   /**

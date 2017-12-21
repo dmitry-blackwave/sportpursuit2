@@ -5,10 +5,9 @@ import configureStore from './store/configureStore';
 import * as constants from './constants/ActionTypes';
 
 const store = configureStore({});
-
-store.dispatch({ type: constants.GET_MENU });
-store.dispatch({ type: constants.GET_BEST_SELLERS });
-store.dispatch({ type: constants.GET_HOME });
+// store.dispatch({ type: constants.GET_MENU });
+// store.dispatch({ type: constants.GET_BEST_SELLERS });
+// store.dispatch({ type: constants.GET_HOME });
 
 /**
  * Component for render application
