@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   brandContainer: {
+    padding: 0,
     backgroundColor: Colors.BRAND_BACKGROUND,
     height: '50%',
   },

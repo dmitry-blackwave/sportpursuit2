@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import { Dimensions, View, StyleSheet } from 'react-native';
-import { OptimizedFlatList } from 'react-native-optimized-flatlist';
+import { Dimensions, View } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 import PropTypes from 'prop-types';
 import Item from './Item';
-
-const styles = StyleSheet.create({
-  separator: {
-    width: 5,
-    marginLeft: 0,
-  },
-});
 
 /**
  * Component for show banner carousel on main screen
@@ -37,7 +30,7 @@ export default class Banner extends Component {
   render() {
     return (
       <View>
-        <OptimizedFlatList
+        <Carousel
           data={this.props.bannerItems}
           renderItem={({ item, index }) => (
             <Item
@@ -45,11 +38,8 @@ export default class Banner extends Component {
               index={index}
             />
           )}
-          keyExtractor={(item, index) => index}
-          horizontal={true}
-          ItemSeparatorComponent={({ highlighted }) => (
-            <View style={styles.separator}/>
-          )}
+          sliderWidth={this.state.viewport.width - 10}
+          itemWidth={this.state.viewport.width - 10}
         />
       </View>
     );

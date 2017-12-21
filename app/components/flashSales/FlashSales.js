@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
-import { OptimizedFlatList } from 'react-native-optimized-flatlist';
+import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Item from './Item';
 
@@ -32,7 +31,7 @@ export default class FlashSales extends Component {
   render() {
     return (
       <View>
-        <OptimizedFlatList
+        <FlatList
           data={this.props.flashSales}
           renderItem={({ item }) => (
             <Item

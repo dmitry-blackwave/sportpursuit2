@@ -7,6 +7,7 @@ import FlashSales from './flashSales/FlashSales';
 import * as Colors from '../constants/Colors';
 import CartButton from './common/CartButton';
 import Button from './common/Button';
+import * as LimitItems from '../constants/LimitItems';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,10 +48,54 @@ export default class Home extends Component {
     bestSellers: PropTypes.object.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 2,
+      flashSales: this.getDefaultFlashSalesList(),
+    };
+  }
+
+  getDefaultFlashSalesList() {
+    return this.props.banners.banners.featuredSales.slice(0, LimitItems.FLASH_SALES_PER_PAGE);
+  }
+
+  getMoreItemsFlashSales() {
+    const currentSize = LimitItems.FLASH_SALES_PER_PAGE * this.state.page;
+    if (currentSize >= this.props.banners.banners.featuredSales.length) {
+      return this.state.flashSales;
+    }
+
+    this.setState({
+      flashSales: this.props.banners.banners.featuredSales.slice(0, currentSize),
+      page: this.state.page + 1,
+    });
+
+    return this.state.flashSales;
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container}>
+        <ScrollView
+          style={styles.container}
+          onScroll={(e) => {
+            let paddingToBottom = 5;
+            paddingToBottom += e.nativeEvent.layoutMeasurement.height;
+            if (
+              e.nativeEvent.contentOffset.y >= e.nativeEvent.contentSize.height - paddingToBottom
+            ) {
+              this.getMoreItemsFlashSales();
+            }
+
+            if (e.nativeEvent.contentOffset.y <= 100) {
+              this.setState({
+                page: 2,
+                flashSales: this.getDefaultFlashSalesList(),
+              });
+            }
+          }}
+        >
           <View style={styles.globalPadding}>
             {!this.props.banners ? <ActivityIndicator size="small" color={Colors.PRIMARY_COLOR}/>
               : <Banner
@@ -72,7 +117,7 @@ export default class Home extends Component {
           <View style={styles.globalPadding}>
             {!this.props.banners ? <ActivityIndicator size="small" color={Colors.PRIMARY_COLOR}/>
               : <FlashSales
-                flashSales={this.props.banners.banners.featuredSales}
+                flashSales={this.state.flashSales}
               />}
           </View>
         </ScrollView>
@@ -95,7 +140,7 @@ export default class Home extends Component {
           <View/>
           <View>
             <Button
-              text="Checkout"
+              text={'Checkout'}
               onPress={() => {
                 Alert.alert(
                   'Checkout message',
